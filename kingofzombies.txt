@@ -1,0 +1,10 @@
+"kingofzombies"{
+"base"	"base"
+"title"	"King of Zombies"
+"category"	"other"
+"menusystem"	"1"
+"ignore"	
+[
+	".git*"
+]
+}
