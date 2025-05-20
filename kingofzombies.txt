@@ -1,10 +1,9 @@
-"kingofzombies"{
-"base"	"base"
-"title"	"King of Zombies"
-"category"	"other"
-"menusystem"	"1"
-"ignore"	
-[
-	".git*"
-]
+"kingofzombies"
+{
+	"base"	"base"
+	"title"	"King of Zombies"
+	"category"	"other"
+	"menusystem"	"1"
+	
+	"author_name"	"Ethan Gaver"
 }
