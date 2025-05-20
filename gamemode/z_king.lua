@@ -1,4 +1,5 @@
 local zTable = include("z_table.lua")
+local p_manage = include("sv_p_manage.lua")
 
 local zKing = {}
 
@@ -14,7 +15,6 @@ function spawnZed(ply, cmd, args)
 
     if IsValid(ply) then
         local zedTable = zTable.zedTable
-        print("args at 1:", args[2])
         selected = zedTable[args[1]]
 
         if GAMEMODE.pTable[ply] < selected.price then
@@ -28,13 +28,14 @@ function spawnZed(ply, cmd, args)
         zed:SetAngles(Angle(0.0, 90.0, 0.0))
         zed:Spawn()
         GAMEMODE.pTable[ply] = GAMEMODE.pTable[ply] - selected.price
+        p_manage.sendPts(ply)
+
         print("Updated points:", GAMEMODE.pTable[ply])
     end
 end
 
 function receiveZedCommand(len, ply)
     local msg = net.ReadString()
-    --print("Sent:", msg)
     spawnZed(ply, "blah", {msg, msg})
 end
 

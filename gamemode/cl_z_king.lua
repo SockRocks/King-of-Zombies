@@ -1,21 +1,9 @@
-local zedTable = {}
-IS_ZKING = false -- remember to make function to receive a class update from the server so this variable is updated
-
-zedTable.normal = 
-{
-    class = "npc_zombie",
-    price = 1
-}
-
-zedTable.fast = 
-{
-    class = "npc_fastzombie",
-    price = 2
-}
+local zedTable = util.JSONToTable(file.Read("zed_table.json", "DATA"))
+local pManage = include("cl_p_manage.lua")
 
 function displaySpawnMen()
     -- Add label to display current amount of points the zking has
-    if input.IsKeyDown(KEY_C) and IS_ZKING then
+    if input.IsKeyDown(KEY_C) and pManage.ZOMBIE_KING then
         if not IsValid(MyFrame) then
             MyFrame = vgui.Create("DFrame")
 
@@ -23,8 +11,12 @@ function displaySpawnMen()
             MyFrame:SetSize(400, 300 + (#zedTable / 10) * 20)
             MyFrame:SetPos(10, 20)
             MyFrame:MakePopup()
+            local curPts = vgui.Create("DLabel", MyFrame)
+            curPts:SetText("Points: " .. pManage.pPoints)
+            curPts:SetPos(5,20)
+            curPts:SetTextColor(Color(255, 255, 0))
 
-            local curCol, curRow = 10, 20
+            local curCol, curRow = 10, 40
             local count = 0
 
             for k, v in pairs(zedTable) do
@@ -36,9 +28,13 @@ function displaySpawnMen()
                 buy:SetPos(curCol, curRow + 20)
 
                 buy.DoClick = function(button)
+                    local pts = pManage.pPoints
                     net.Start("spawnZed")
                     net.WriteString(k)
                     net.SendToServer()
+                    if v.price <= pts then
+                        curPts:SetText("Points: " .. (pts - v.price))
+                    end
                 end
                 curCol = curCol + 100
                 count = count + 1

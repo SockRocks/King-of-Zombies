@@ -6,9 +6,8 @@ local weapTable = {}
 
 local wTable = {} -- Holds all valid weapons
 
-function populateWTable()
-    wTable[0] = "weapon_pistol"
-    wTable[1] = "weapon_shotgun"
+function populateWTable(File)
+    wTable = util.JSONToTable(file.Read("w_table.json", "DATA"), false, false)
 end
 
 function spawnRandWeap(ply)
@@ -28,7 +27,15 @@ function spawnRandWeap(ply)
     newWeap:Spawn()
 end
 
-populateWTable()
+if not file.Exists("w_table.json", "DATA") then
+    local default = {[0] = "weapon_pistol", [1] = "weapon_shotgun"}
+
+    local data = util.TableToJSON(default, true)
+    file.Open("w_table.json", "w", "DATA")
+    file.Write("w_table.json", data)
+end
+
+populateWTable("w_table.json")
 
 
 weapTable.wTable = wTable

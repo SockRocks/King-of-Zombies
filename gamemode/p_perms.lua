@@ -33,7 +33,7 @@ function giveZPts(target, dmgInfo)
         local enem = isEnemy(cls)
 
         if enem then
-            GAMEMODE.pTable[ZOMBIE_KING] = GAMEMODE.pTable[GAMEMODE.ZOMBIE_KING] + dmg / 2
+            GAMEMODE.pTable[GAMEMODE.ZOMBIE_KING] = GAMEMODE.pTable[GAMEMODE.ZOMBIE_KING] + dmg / 2
         end
     else
         -- Award the player points if they damaged a zombie
