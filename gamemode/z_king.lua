@@ -14,6 +14,7 @@ function spawnZed(ply, cmd, args)
 
     if IsValid(ply) then
         local zedTable = zTable.zedTable
+        print("args at 1:", args[2])
         selected = zedTable[args[1]]
 
         if GAMEMODE.pTable[ply] < selected.price then
@@ -31,7 +32,15 @@ function spawnZed(ply, cmd, args)
     end
 end
 
+function receiveZedCommand(len, ply)
+    local msg = net.ReadString()
+    --print("Sent:", msg)
+    spawnZed(ply, "blah", {msg, msg})
+end
+
 zKing.spawnZed = spawnZed
 
 concommand.Add("spawn-zombie", spawnZed)
+
+net.Receive("spawnZed", receiveZedCommand)
 return zKing

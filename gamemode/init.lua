@@ -1,8 +1,8 @@
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("player_classes/survivor.lua")
 AddCSLuaFile("player_classes/zombie_king.lua")
-AddCSLuaFile("cl_survivor.lua")
 AddCSLuaFile("shared.lua")
+AddCSLuaFile("cl_z_king.lua")
 
 include("shared.lua")
 include("p_perms.lua")
@@ -58,3 +58,6 @@ concommand.Add("be-survivor", setSurvivor)
 concommand.Add("reset-class", resetClass)
 concommand.Add("get-class", getClass)
 concommand.Add("be-zking", setZKing)
+
+-- Set up network strings
+util.AddNetworkString("spawnZed")
