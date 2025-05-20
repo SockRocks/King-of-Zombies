@@ -14,6 +14,7 @@ zedTable.fast =
 }
 
 function displaySpawnMen()
+    -- Add label to display current amount of points the zking has
     if input.IsKeyDown(KEY_C) and IS_ZKING then
         if not IsValid(MyFrame) then
             MyFrame = vgui.Create("DFrame")
