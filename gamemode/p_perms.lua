@@ -48,6 +48,5 @@ function giveZPts(target, dmgInfo)
     end
 end
 
-
 hook.Add("EntityTakeDamage", "Detect zed damage", giveZPts)
 hook.Add("PlayerNoClip", "Disable no-clip for survivors", noClipPerms)

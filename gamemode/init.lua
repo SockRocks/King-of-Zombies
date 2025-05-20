@@ -1,10 +1,12 @@
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("player_classes/survivor.lua")
 AddCSLuaFile("player_classes/zombie_king.lua")
+AddCSLuaFile("cl_survivor.lua")
 AddCSLuaFile("shared.lua")
 
 include("shared.lua")
 include("p_perms.lua")
+include("sv_survivor.lua")
 local zombKing = include("z_king.lua")
 local wTable = include("weapTable.lua")
 local zTable = include("z_table.lua")
