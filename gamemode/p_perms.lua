@@ -29,7 +29,7 @@ function giveZPts(target, dmgInfo)
     local cls = att_ent:GetClass()
 
     -- If the player took damage
-    if target:IsPlayer() then
+    if target:IsPlayer() and GAMEMODE.ZOMBIE_KING then
         local enem = isEnemy(cls)
 
         if enem then

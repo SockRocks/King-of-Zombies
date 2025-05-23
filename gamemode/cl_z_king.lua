@@ -2,6 +2,7 @@ local zedTable = util.JSONToTable(file.Read("zed_table.json", "DATA"))
 local pManage = include("cl_p_manage.lua")
 
 function displaySpawnMen()
+
     -- Add label to display current amount of points the zking has
     if input.IsKeyDown(KEY_C) and pManage.ZOMBIE_KING then
         if not IsValid(MyFrame) then
@@ -11,7 +12,7 @@ function displaySpawnMen()
             MyFrame:SetSize(400, 300 + (#zedTable / 10) * 20)
             MyFrame:SetPos(10, 20)
             MyFrame:MakePopup()
-            local curPts = vgui.Create("DLabel", MyFrame)
+            curPts = vgui.Create("DLabel", MyFrame)
             curPts:SetText("Points: " .. pManage.pPoints)
             curPts:SetPos(5,20)
             curPts:SetTextColor(Color(255, 255, 0))
