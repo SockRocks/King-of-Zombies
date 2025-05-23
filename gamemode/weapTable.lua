@@ -13,7 +13,7 @@ end
 function spawnRandWeap(ply)
     -- Choose a random weapon from the table
     local rnd = math.random(0, #wTable)
-    local weapon = wTable[rnd]
+    local weapon = wTable[rnd].class
 
     -- Calculate a random point around the player to spawn the weapon
     local pPos = ply:GetPos()
@@ -28,7 +28,33 @@ function spawnRandWeap(ply)
 end
 
 if not file.Exists("w_table.json", "DATA") then
-    local default = {[0] = "weapon_pistol", [1] = "weapon_shotgun"}
+    --[[
+    Weapons are defined by class and type
+    type indicates whether it's a primary, secondary, tertiary, or item.
+    A player can have one of each excluding items
+    ]]
+    local default = {
+        [0] = 
+            {
+                class = "weapon_pistol", 
+                wType = "secondary"
+            },
+        [1] = 
+        {
+            class = "weapon_shotgun",
+            wType = "primary"
+        },
+        [2] = 
+        {
+            class = "weapon_frag",
+            wType = "tertiary"
+        },
+        [3] = 
+        {
+            class = "item_healthkit",
+            wType = "item"
+        }
+    }
 
     local data = util.TableToJSON(default, true)
     file.Open("w_table.json", "w", "DATA")

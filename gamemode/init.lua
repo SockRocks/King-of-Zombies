@@ -60,7 +60,50 @@ function GM:PlayerSay(ply, msg)
     return msg
 end
 
+function getWTableEntry(weap)
+    for _, v in pairs(wTable.wTable) do
+        if v.class == weap:GetClass() then
+            return v
+        end
+    end
+    return nil 
+end
+function GM:PlayerCanPickupWeapon(ply, weap)
+    if ply ~= self.ZOMBIE_KING then
+        local found = false
+        for k,v in pairs(wTable.wTable) do
+            if v.class == weap:GetClass() then
+                found = true 
 
+                for _, j in pairs(ply:GetWeapons()) do
+                    local entry = getWTableEntry(j)
+
+                    -- If one of the inventory items is non-existent player can't pickup items
+                    if not entry then
+                        return false
+                    end
+
+                    -- Can't have more than 1 of the same type
+                    if entry.wType == v.wType then
+                        ply:DropWeapon(j)
+                        return true
+                    end
+                end
+
+                return true
+            end
+        end
+
+        if (#ply:GetWeapons() == 0) and found then
+            return true
+        end
+
+        return false
+
+    else
+        return false
+    end
+end
 
 -- COMMANDS ---
 function setSurvivor(ply)
